@@ -2,4 +2,11 @@
 .~lock.*
 Thumbs.db
 desktop.ini
+node_modules/
+.next/
+out/
+.env
+.env*.local
+backups/*.dump
+*.pem
 
