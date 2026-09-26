@@ -9,8 +9,10 @@
 <h1>Dashboard</h1>
 
 <Card title="Next action">
+  <div class="lr-highlight" style="padding-left:var(--space-3)">
   <p><strong>{mockCareer.nextAction.title}</strong></p>
   <Button href={mockCareer.nextAction.href} size="sm">Start now</Button>
+  </div>
 </Card>
 
 <div class="lr-grid-2">

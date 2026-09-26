@@ -26,3 +26,10 @@
 <main id="main" class="lr-container lr-page lr-stack">
   {@render children()}
 </main>
+<footer class="lr-footer">
+  <div class="lr-footer-inner">
+    <strong>LegendRise™</strong>
+    <span>Career & Venture OS — prototype with mock data.</span>
+    <span style="margin-left:auto"><a href="/portfolio">Evidence</a> · <a href="/coach">Coach</a> · <a href="/dashboard">Dashboard</a></span>
+  </div>
+</footer>

@@ -12,4 +12,5 @@ out/
 backups/*.dump
 *.pem
 *.tsbuildinfo
+data/
 

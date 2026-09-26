@@ -10,6 +10,8 @@
     "preview": "vite preview",
     "start": "node build",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "test": "vitest run",
+    "db:dev": "tsx scripts/devdb.ts",
     "postinstall": "prisma generate",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
@@ -33,7 +35,9 @@
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
+    "embedded-postgres": "16.14.0-beta.17",
     "prisma": "^6.0.0",
+    "vitest": "^3.0.0",
     "svelte-check": "^4.0.0",
     "tsx": "^4.0.0",
     "typescript": "^5.7.0"
