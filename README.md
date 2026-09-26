@@ -26,3 +26,4 @@ LegendRise™ is a capability development and venture progression platform that 
 - `LegendRise™ PRD.docx` — product requirements (source of truth)
 - `PRD.md` — same requirements as markdown (renders on GitHub, with figures)
 - `docs/decision-register.md` — open decisions & validation status
+- `docs/adr/` — architecture decision records (Phase 2)
