@@ -9,4 +9,5 @@ out/
 .env*.local
 backups/*.dump
 *.pem
+*.tsbuildinfo
 
