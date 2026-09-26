@@ -1,10 +1,13 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
+import { BETTER_AUTH_SECRET, BETTER_AUTH_URL } from "$env/static/private";
 import { prisma } from "./db";
 
-// Better Auth server instance (ADR-3). Email verification + password reset
-// mail is sent via Resend when RESEND_API_KEY is set, else logged (dev).
+// Better Auth server instance (ADR-3). Secrets come from $env/static/private
+// so they are statically available at build AND runtime (never shipped to client).
 export const auth = betterAuth({
+  secret: BETTER_AUTH_SECRET,
+  baseURL: BETTER_AUTH_URL,
   database: prismaAdapter(prisma, { provider: "postgresql" }),
   emailAndPassword: {
     enabled: true,
