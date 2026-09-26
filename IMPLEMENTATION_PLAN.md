@@ -2,7 +2,7 @@
 
 *Derived from: LegendRise™ PRD v2.0 (Career & Venture Progression Platform), September 2026.*
 *Items marked **[Implementation choice]** are concrete technical decisions the PRD leaves open.*
-*Stack revision (founder decision): **local PostgreSQL + Prisma, Better Auth, Cloudflare R2, local hosting. No Supabase. No Vercel.***
+*Stack revision (founder decision): **local PostgreSQL + Prisma, Better Auth, Cloudflare R2, local hosting. No Supabase. No Vercel. No React — SvelteKit instead of Next.js.***
 
 ## Guiding non-negotiables (apply to every phase)
 
@@ -40,7 +40,7 @@
 
 - **Decide and freeze:** the ONE MVP career, target level, success metric, and first 10 learning/practice items (§20 steps 1–2; §6.1 entry gates).
 - Repo setup: GitHub connected (`main`, `.gitignore`). `README.md` (purpose/scope/stack/rules per §20 step 1), `docs/decision-register.md` (§21.2, §25), PRD + this plan stored in-repo.
-- Environments: local dev (this laptop) → production-like local run (`next build && next start`). Public staging deferred with hosting (Phase 11).
+- Environments: local dev (this laptop) → production-like local run (`npm run build` + node-adapter output). Public staging deferred with hosting (Phase 11).
 - **[Implementation choice]** Tooling: VS Code + GitHub + Node 22 + local PostgreSQL + Prisma + Better Auth + Cloudflare R2. (Playbook proposed Replit/Supabase/Vercel (§14) — replaced per founder decision; recorded in decision register.)
 - Local Postgres setup (founder-assisted): install PostgreSQL 16/17 (EDB installer, includes pgAdmin) → create `legendrise` database + app role → connection string into `.env` (never committed). Backup routine: scheduled `pg_dump` before anything matters.
 - Secret handling rule: API keys server-side only, `.env` never committed (§11.2).
@@ -64,7 +64,7 @@
 
 **Goal:** record every load-bearing choice before code (§14 adapted + §25).
 
-- **ADR-1 Web framework / hosting** — **[Implementation choice]** Next.js (App Router), **self-hosted on local device**: `next dev` during build, `next build && next start` for prod-like runs. No Vercel. API routes are the **server-only AI/storage gateway** (keys never reach the browser, §11.2). LAN testing via bound hostname; public URL deferred to Phase 11 (VPS).
+- **ADR-1 Web framework / hosting** — **[Implementation choice]** SvelteKit (Svelte 5, TypeScript) with adapter-node, **self-hosted on local device**: `vite dev` during build, `vite build` + `node build` for prod-like runs. No React, no Next.js, no Vercel. Server routes (`+server.ts`) and server `load` functions are the **server-only AI/storage gateway** (keys never reach the browser, §11.2). LAN testing via bound host; public URL deferred to Phase 11 (VPS).
 - **ADR-2 Database + ORM** — **[Implementation choice]** Local PostgreSQL 16/17 + **Prisma** (schema + versioned migrations in `/prisma`). No Supabase. Prisma Client is the only DB access path; **no RLS — app-level scoping enforced per non-negotiable #8**, reviewed per task.
 - **ADR-3 Auth** — **[Implementation choice]** **Better Auth** with Prisma adapter: email/password + email verification (via Resend). Sessions checked server-side on every protected route/API. Social logins deferred.
 - **ADR-4 Storage** — **[Implementation choice]** **Cloudflare R2** (S3-compatible SDK): public bucket/prefix for lesson media; **presigned URLs** for private evidence uploads/downloads. No Supabase Storage.
@@ -135,12 +135,12 @@ Build in this order: **tutor → assessment evaluator → simulation agent → n
 Walk the §22 gate item by item (hosting items adapted to local): product (no manual intervention), AI (tested prompts + fallbacks), content (complete MVP path), assessment (consistent feedback), data (protected + **pg_dump backup routine verified**), analytics (events live), support (report problem/incorrect AI), payments (**off** until commercial validation), mobile (deferred), legal (privacy policy, terms, consent reviewed pre-scale).
 
 - Privacy (§16.1): consent, access control (app-level scoping audited), conversation privacy, audit, retention/deletion rules, reporting — all acceptance-tested.
-- `next build` clean; prod-like local run tested on desktop + mobile browsers (§20 steps 17, 20, adapted).
+- Production build clean (`npm run build`); prod-like local run tested on desktop + mobile browsers (§20 steps 17, 20, adapted).
 - **Exit:** local release verified; public/controlled beta waits on Phase-11 hosting.
 
 ## Phase 11 — Post-MVP (§24, in order)
 
-1. **Public hosting** (VPS + Postgres + R2 stay; `next start` standalone output) → 2. multiple career paths + richer portfolio → 3. adaptive progression graph → 4. **Venture Lab** (problem → customer validation → market → feasibility → model → financial logic → plan → pilot, §8 + §8.1 evidence rules) → 5. employer/institutional pathways → 6. African expansion. Native mobile (Expo, same backend) after web stabilises; Paystack after payment validation (§20 steps 18–19).
+1. **Public hosting** (VPS + Postgres + R2 stay; SvelteKit node-adapter output) → 2. multiple career paths + richer portfolio → 3. adaptive progression graph → 4. **Venture Lab** (problem → customer validation → market → feasibility → model → financial logic → plan → pilot, §8 + §8.1 evidence rules) → 5. employer/institutional pathways → 6. African expansion. Native mobile (Expo, same backend) after web stabilises; Paystack after payment validation (§20 steps 18–19).
 
 ## Key risks & controls (from §25, watched every phase + stack additions)
 

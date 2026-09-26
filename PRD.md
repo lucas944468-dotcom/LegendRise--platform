@@ -104,7 +104,7 @@ Layered web architecture. Product layers and MVP status:
 ![Figure 7. Layered system architecture.](docs/figures/image7.png)
 *Figure 7. Layered system architecture.*
 
-Decided stack (founder decision; see Appendix D, Change 1): Next.js (App Router, TypeScript) self-hosted on local device; local PostgreSQL + Prisma ORM/migrations; Better Auth (Prisma adapter); Cloudflare R2 (S3-compatible) storage; Resend email. No Supabase. No Vercel. All AI calls server-side via API routes; keys never reach the browser.
+Decided stack (founder decision; see Appendix D, Change 1): SvelteKit (Svelte 5, TypeScript) with node adapter, self-hosted on local device; local PostgreSQL + Prisma ORM/migrations; Better Auth (Prisma adapter); Cloudflare R2 (S3-compatible) storage; Resend email. No Supabase. No Vercel. No React. All AI calls server-side via server routes/load functions; keys never reach the browser.
 
 ### 1.5 Technical Requirements
 
@@ -705,7 +705,8 @@ Reason: operate the MVP at zero platform cost on the founder's own device; keep 
 
 - Replit (build env) → local-first build (VS Code + GitHub).
 - Supabase (Auth/Postgres/storage) → local PostgreSQL + Prisma ORM; Better Auth (Prisma adapter); Cloudflare R2 storage.
-- Vercel (hosting) → self-hosted on local device (next dev / next start); public hosting deferred to Phase 4 (VPS).
+- Vercel (hosting) → self-hosted on local device (SvelteKit `vite dev` / `node build` output); public hosting deferred to Phase 4 (VPS).
+- Next.js/React (web framework) → SvelteKit (no React anywhere in the web stack); Better Auth + Prisma + R2 integrations move to SvelteKit server routes.
 - Added: app-level authorization rule (every user query scoped to session) replacing database row-level security; scheduled pg_dump backups; R2 presigned URLs for private evidence.
 - Impact: Phase 1 build sequence, Section 1.4/1.5/1.6, and go-live gate updated; no product-scope change.
 
