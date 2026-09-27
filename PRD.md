@@ -14,6 +14,9 @@
 
 ## Contents
 
+- [Build Summary (framework, database, accounts, files)](#build-summary-framework-database-accounts-files)
+- [Decisions Log](#decisions-log)
+- [Agent Steering Notes](#agent-steering-notes)
 - [1. Overview](#1-overview)
 - [2. Phase 1 — MVP: One Career Pathway](#2-phase-1--mvp-one-career-pathway)
 - [3. Phase 2 — Depth & Scale](#3-phase-2--depth--scale)
@@ -21,6 +24,52 @@
 - [5. Phase 4 — Future Platform](#5-phase-4--future-platform)
 - [6. Risks & Mitigations](#6-risks--mitigations)
 - [7. Appendices](#7-appendices)
+
+---
+
+## Build Summary (framework, database, accounts, files)
+
+| Area | Decision |
+|---|---|
+| Product | LegendRise™ Career & Venture OS — progression engine (destination → baseline → roadmap → learning → practice → simulation → rubric assessment → evidence → next action) |
+| Framework | SvelteKit 2 + Svelte 5 + TypeScript, adapter-node, self-hosted locally. No React, no Next.js, no Vercel |
+| Database | Local PostgreSQL 16 + Prisma ORM (versioned migrations in `prisma/migrations/`, seed in `prisma/seed.ts`). All PRD §1.5 entities implemented |
+| Accounts (auth) | Better Auth + Prisma adapter: email/password sign-up, email verification, password reset, server sessions; `User.isAdmin` gates `/admin`; every user query scoped by session (no RLS safety net) |
+| Storage | Cloudflare R2 (S3-compatible): public `lessons/` + `resources/`, private `evidence/{userId}/` via presigned URLs |
+| Email | Resend (verification/reset); dev fallback logs the link |
+| AI | 7 isolated services in `src/lib/ai/` (assessor, roadmap, tutor, simulation, evaluator, recommender, venture): OpenAI path when `OPENAI_API_KEY` exists, deterministic v0 fallback otherwise; versioned prompts + zod schemas |
+| Analytics | `AnalyticsEvent` model + tracker wired to the §1.5 event taxonomy |
+| Files (repo structure) | `PRD.md`, `design.html`, `index.html`, `src/routes/` (landing, onboarding, baseline, dashboard, path, lesson, practice, simulation, assessment, portfolio, coach, admin, api/*, support, privacy, terms, venture), `src/lib/` (db, auth, r2, access, analytics, roadmap, flags, openai, ai/*, components/*, mock), `prisma/` (schema, migrations, seed), `scripts/` (devdb, backup, r2check, make-admin), `content/` (career freeze templates), `docs/` (adr/0001-0008, decision-register, deploy-vps), `tests/` |
+| Build phases | Phase 1 MVP (one career) → Phase 2 depth & scale → Phase 3 Venture Lab + polish → Phase 4 future platform (details below) |
+| Current phase | Phase 3 build in progress: journey slice live on Postgres (signup → onboarding → baseline → roadmap → dashboard verified end-to-end); lessons/practice/assessment/evidence/admin/analytics/support/venture stub shipped; AI on v0 fallback pending OpenAI key |
+| Design notes | Premium calm system: ink navy `#14406b` + muted gold `#b8860b`, system fonts, 4px spacing, distinct milestone states, WCAG 2.1 AA. Full preview in `design.html`; running prototype in `index.html` |
+
+## Decisions Log
+
+| # | Date | Decision | Status |
+|---|---|---|---|
+| 1 | 2026-09-26 | One career pathway is the MVP beachhead | Open until tested |
+| 2 | 2026-09-26 | Local stack: Postgres + Prisma, Better Auth, R2, local hosting (replaces Replit/Supabase/Vercel) | Decided |
+| 3 | 2026-09-26 | SvelteKit + adapter-node self-hosted; no React anywhere | Decided |
+| 4 | 2026-09-26 | App-level authorization (no RLS): session-scoped queries + negative tests | Decided |
+| 5 | 2026-09-26 | AI as 7 versioned services; v0 deterministic fallbacks until OpenAI key | Decided |
+| 6 | 2026-09-26 | Venture Lab locked behind flag until career engine validates | Decided |
+| 7 | 2026-09-26 | No billing code before commercial validation | Decided |
+| 8 | 2026-09-26 | Users value progression over content volume | Open |
+| 9 | 2026-09-26 | Users will pay for the complete journey | Open (needs real payment test) |
+
+## Agent Steering Notes
+
+Notes for any AI coding agent continuing this build (enforced, not advisory):
+
+1. Stack is fixed: SvelteKit, Prisma/postgres, Better Auth, R2. Never reintroduce React, Next.js, Supabase, or Vercel.
+2. Every server query on user-owned data MUST include `where: { userId }` (use `whereUser()` from `src/lib/access.ts`). Add negative tests for new user-owned reads.
+3. AI work goes in `src/lib/ai/<service>.ts` only: bump `PROMPT_VERSION`, keep zod input/output schemas, keep the v0 fallback honest (flag `uncertain`, never invent credentials/outcomes).
+4. Verify every change with `npm run check` (0 errors) and `npm run build` (exit 0) before committing. Tests: `npm test`.
+5. Dev database: `npx tsx scripts/devdb.ts` (embedded Postgres 16, port 5433); migrations via `prisma migrate dev`; never commit `.env`, `data/`, or `*.dump`.
+6. Content is data, not code: new careers/lessons/rubrics ship as DB rows (admin CMS or seed), never hard-coded screens.
+7. Prototype pages under `src/routes/` may use `src/lib/mock.ts` ONLY until their phase wires them to Prisma; mark placeholders honestly.
+8. Secrets stay server-side (`$env/static/private`, API routes). No keys, tokens, or passwords in the repo, issues, or recordings.
 
 ---
 

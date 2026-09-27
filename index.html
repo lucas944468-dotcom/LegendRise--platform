@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LegendRise™ — Prototype (Phase 3)</title>
+<style>
+:root{--primary:#14406b;--strong:#0e2f52;--accent:#b8860b;--ok:#1a7f4b;--warn:#b45309;--err:#b91c1c;--ev:#6d28d9;--lock:#8a97a3;--ink:#1c2b3a;--mut:#52616f;--bg:#f4f6f8;--card:#fff;--bd:#dbe2e8;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.5}
+.wrap{max-width:56rem;margin:0 auto;padding:0 1rem}
+.top{background:var(--strong);border-bottom:3px solid var(--accent);color:#fff}
+.top .wrap{display:flex;gap:.5rem;align-items:center;padding:.7rem 1rem;flex-wrap:wrap}
+.brand{font-weight:700}.brand em{color:var(--accent);font-style:normal}
+.nav{display:flex;gap:.4rem;margin-left:auto;flex-wrap:wrap}
+.nav button{background:none;border:0;color:#d6e2ee;font:inherit;font-size:.85rem;font-weight:600;padding:.25rem .7rem;border-radius:9999px;cursor:pointer}
+.nav button:hover,.nav button.on{background:rgb(255 255 255/.16);color:#fff}
+main{padding:1.25rem 0 3rem}.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:1.1rem;margin-bottom:.9rem;box-shadow:0 1px 2px 0 rgb(0 0 0/.05)}
+h1{color:var(--primary);margin:.2rem 0 .6rem}h2{color:var(--primary);font-size:1.2rem;margin:0 0 .5rem}
+.mut{color:var(--mut);font-size:.875rem}
+.btn{display:inline-block;border:1px solid transparent;border-radius:8px;padding:.5rem 1.2rem;font-weight:600;cursor:pointer;font-size:1rem;background:var(--primary);color:#fff}
+.btn.sec{background:#fff;border-color:var(--bd);color:var(--primary)}
+.badge{display:inline-block;font-size:.75rem;font-weight:700;padding:.2rem .7rem;border-radius:9999px;color:#fff}
+.c{background:var(--ok)}.p{background:var(--primary)}.l{background:var(--lock)}.n{background:var(--warn)}.e{background:var(--ev)}
+.bar{height:.6rem;background:var(--bd);border-radius:9999px;overflow:hidden}.bar>span{display:block;height:100%;background:var(--primary)}
+table{width:100%;border-collapse:collapse;font-size:.875rem}th,td{border:1px solid var(--bd);padding:.4rem .6rem;text-align:left}th{background:var(--bg)}
+.bub{max-width:85%;padding:.55rem .85rem;border-radius:12px;margin:.35rem 0}.ai{background:#fff;border:1px solid var(--bd)}.us{background:var(--primary);color:#fff;margin-left:auto}
+label{font-weight:600;font-size:.875rem;display:block;margin:.6rem 0 .25rem}
+input,select,textarea{font:inherit;padding:.5rem .7rem;border:1px solid var(--bd);border-radius:8px;width:100%;background:#fff;box-sizing:border-box}
+.hero{text-align:center;padding:1.6rem 0}.hero h1{font-size:1.8rem}.hero h1:after{content:"";display:block;width:4.5rem;height:4px;background:var(--accent);border-radius:9999px;margin:.7rem auto 0}
+.screen{display:none}.screen.on{display:block}
+footer{background:var(--strong);color:#d6e2ee;border-top:3px solid var(--accent);margin-top:2rem;font-size:.85rem}
+.hl{border-left:4px solid var(--accent);padding-left:.7rem}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><span class="brand">LegendRise™ <em>prototype · Phase 3</em></span><nav class="nav" id="nav"></nav></div></header>
+<main class="wrap">
+
+<section class="screen" id="s-landing">
+<div class="hero"><h1>Choose what you want to become or build.</h1>
+<p class="mut">Assessed baseline → mapped route → learning → practice → simulation → rubric assessment → evidence → next action.</p>
+<p><button class="btn" data-go="s-onboarding">Start with Career</button> <button class="btn sec" data-go="s-dashboard">See the dashboard</button></p></div>
+<div class="card"><h2>Assess</h2><p class="mut">A short diagnostic finds your level, gaps — and marks what is still uncertain.</p></div>
+<div class="card"><h2>Practise for real</h2><p class="mut">Workplace tasks plus AI role-play with clients, managers and customers.</p></div>
+<div class="card"><h2>Prove it</h2><p class="mut">Rubric-scored work becomes portfolio evidence. The dashboard always shows one next action.</p></div>
+</section>
+
+<section class="screen" id="s-onboarding">
+<h1>Onboarding</h1><p class="mut">Saved in this browser (demo data — no account needed for the recording).</p>
+<div class="card"><h2>Your goal</h2>
+<label for="o-goal">Goal type</label><select id="o-goal"><option>Career</option><option>Venture (later)</option></select>
+<label for="o-target">Target career and level</label><input id="o-target" value="Support Specialist — Junior">
+<label for="o-level">Current level</label><select id="o-level"><option>Student / graduate</option><option>Entry level</option><option>Mid level</option><option>Changing career</option></select>
+<label for="o-hours">Weekly availability (hours)</label><input id="o-hours" value="6">
+<p><button class="btn" id="o-save">Continue to baseline</button></p></div>
+</section>
+
+<section class="screen" id="s-baseline">
+<h1>Baseline diagnostic</h1><p class="mut">Four quick questions → estimated level + gaps → sequenced roadmap.</p>
+<div class="card"><h2>Starting-point check</h2>
+<label>Have you done this kind of work before?</label><input id="b1" value="Some volunteering">
+<label>Confidence explaining work to a client (1-5)</label><input id="b2" value="3">
+<label>Which tools have you used?</label><input id="b3" value="Email, sheets">
+<label>Hours you can practise weekly?</label><input id="b4" value="6">
+<p><button class="btn" id="b-save">See my roadmap</button></p></div>
+</section>
+
+<section class="screen" id="s-dashboard">
+<h1>Dashboard</h1>
+<div class="card"><h2>Next action</h2><div class="hl"><p><b id="d-next">Complete Practice: Draft a client status update</b></p><p><button class="btn" data-go="s-practice">Start now</button></p></div></div>
+<div class="card"><h2 id="d-career">Your career path</h2><p class="mut" id="d-level"></p><div class="bar"><span id="d-bar" style="width:20%"></span></div><p class="mut" id="d-pct"></p></div>
+<div class="card"><h2>Evidence snapshot</h2><div id="d-ev"></div><p><button class="btn sec" data-go="s-portfolio">Open full portfolio</button> <button class="btn sec" data-go="s-coach">Ask the coach</button></p></div>
+</section>
+<section class="screen" id="s-path">
+<h1>Career Path</h1><p class="mut" id="p-sub"></p><div id="p-list"></div>
+</section>
+
+<section class="screen" id="s-lesson">
+<h1 id="l-title">Lesson 1.1 — What good workplace communication looks like</h1>
+<div class="card"><h2>Lesson</h2><p>Clear workplace communication is short, specific, and owned. Say what changed, what happens next, and who owns it. Vague updates create follow-up meetings; crisp updates prevent them.</p><p class="mut">[Narrated media + screen demo play here in the full build.]</p></div>
+<div class="card"><h2>Resources</h2><ul><li>Communication checklist (download)</li><li>Worked example: vague vs crisp update</li></ul></div>
+<p><button class="btn" id="l-done">Mark complete &amp; continue to practice</button> <button class="btn sec" data-go="s-coach">Ask the tutor</button></p>
+</section>
+
+<section class="screen" id="s-practice">
+<h1>Practice 3.1 — Draft a client status update</h1>
+<div class="card"><h2>Brief</h2><p>Your client asked for a Friday update. Draft max 150 words covering: progress, next steps, one risk.</p></div>
+<div class="card"><h2>Hints</h2><ul><li>Lead with the outcome.</li><li>Name an owner for every next step.</li><li>Risks need a mitigation, not just a warning.</li></ul></div>
+<div class="card"><h2>Your work</h2>
+<label for="w-draft">Draft</label><textarea id="w-draft" rows="6">We shipped the migration on Friday because testing passed. Next we will monitor errors and I will own the rollout. The risk is load spikes and we will mitigate with caching. Thank you.</textarea>
+<p><button class="btn" id="w-submit">Submit work</button></p>
+<p class="mut">Submitting stores a versioned draft; scoring happens on the assessment screen.</p></div>
+</section>
+
+<section class="screen" id="s-simulation">
+<h1>Simulation — Difficult client call</h1>
+<div class="card"><h2>Scenario</h2><p>You are meeting Mrs. Adeyemi, a busy client. Delivery slipped by two days. Keep her trust without over-promising.</p></div>
+<div class="card"><h2>Role-play</h2><div id="sim-chat"></div>
+<label for="sim-in">Your reply</label><input id="sim-in" value="We will deliver Monday 10am with hourly updates until then.">
+<p><button class="btn" id="sim-send">Send</button> <button class="btn sec" id="sim-finish">Finish &amp; get feedback</button></p>
+<p class="mut" id="sim-fb"></p></div>
+</section>
+
+<section class="screen" id="s-assessment">
+<h1>Assessment — Status-update writing</h1>
+<div class="card"><h2>Task</h2><p>Submit the status-update draft. It is scored against the rubric — every score links to observable criteria.</p></div>
+<div class="card"><h2>Rubric &amp; scores</h2><div id="a-table"></div><p class="mut" id="a-fb"></p>
+<p id="a-unlock"></p></div>
+<div class="card"><h2>Submit / retry</h2>
+<label for="a-draft">Your work</label><textarea id="a-draft" rows="5"></textarea>
+<p><button class="btn" id="a-score">Score my work</button></p></div>
+</section>
+
+<section class="screen" id="s-portfolio">
+<h1>Portfolio</h1><p class="mut">Evidence first: every item traces back to source work and rubric scores.</p>
+<div class="card"><h2>Evidence record</h2><div id="pf-list"></div></div>
+</section>
+
+<section class="screen" id="s-coach">
+<h1>AI Coach</h1>
+<div class="card"><h2>Contextual support</h2><div id="c-chat"></div>
+<label for="c-in">Ask about your current lesson</label><input id="c-in" value="What should a status update lead with?">
+<p><button class="btn" id="c-ask">Ask</button></p>
+<p class="mut">Grounded v0 tutor: quotes the lesson, flags uncertainty. Full AI when the key is configured.</p></div>
+</section>
+
+</main>
+<footer><div class="wrap">LegendRise™ Career &amp; Venture OS · standalone prototype (no server) · pairs with PRD.md + design.html</div></footer>
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const store={load(){try{return JSON.parse(localStorage.getItem("lr3")||"{}")}catch(e){return{}}},save(s){localStorage.setItem("lr3",JSON.stringify(s))}};
+let S=Object.assign({screen:"s-landing",profile:null,progress:[],subs:[],ev:[],simTurns:0,lessonDone:false},store.load());
+const MS=[{t:"Foundations: workplace communication"},{t:"Core tools and workflows"},{t:"First supervised tasks"},{t:"Independent delivery"},{t:"Portfolio & readiness review"}];
+const LESSON="Clear workplace communication is short, specific, and owned. Say what changed, what happens next, and who owns it. Vague updates create follow-up meetings; crisp updates prevent them.";
+function persist(){store.save(S)}
+function go(id){S.screen=id;persist();render()}
+function badge(st){const m={completed:["c","Completed"],"in-progress":["p","In progress"],locked:["l","Locked"],"needs-attention":["n","Needs attention"],evidence:["e","Evidence"]}[st];return `<span class="badge ${m[0]}">${m[1]}</span>`}
+function stateOf(i){const p=S.progress.find(p=>p.i===i);return p?p.st:(i===0?"in-progress":"locked")}
+function render(){
+document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("on",s.id===S.screen));
+document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.s===S.screen));
+const done=S.progress.filter(p=>p.st==="completed").length,pct=Math.round(done/5*100);
+$("d-bar").style.width=pct+"%";$("d-pct").textContent=pct+"% complete · "+done+" of 5 milestones";
+$("d-career").textContent=S.profile?S.profile.target+" — your career path":"Your career path";
+$("d-level").textContent=S.profile?(S.profile.level+" · "+S.profile.hours+"h/week"):"";
+const nx=S.progress.find(p=>p.st==="in-progress");
+$("d-next").textContent=nx?("Continue: Milestone "+(nx.i+1)+" — "+MS[nx.i].t):"Roadmap complete — well done.";
+$("d-ev").innerHTML=S.ev.length?S.ev.slice(-2).map(e=>`<p>${badge("evidence")} <b>${e.t}</b><br><span class="mut">${e.s}</span></p>`).join(""):'<p class="mut">No evidence yet — score Demonstrated to land here.</p>';
+$("p-sub").textContent=S.profile?S.profile.target+" · "+S.profile.level:"";
+$("p-list").innerHTML=MS.map((m,i)=>{const st=stateOf(i);return `<div class="card"><h2>Milestone ${i+1} — ${m.t}</h2>${badge(st)}${st==="in-progress"?'<p><button class="btn sec" data-go="s-lesson">Continue learning</button></p>':""}</div>`}).join("");
+$("pf-list").innerHTML=S.ev.length?S.ev.map(e=>`<p>${badge("evidence")} <b>${e.t}</b><br><span class="mut">${e.s}</span></p>`).join(""):'<p class="mut">No evidence yet — complete a practical task, score Demonstrated, and it lands here automatically.</p>';
+document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
+}
+function nav(){const items=[["s-landing","Home"],["s-onboarding","Onboarding"],["s-baseline","Baseline"],["s-dashboard","Dashboard"],["s-path","Path"],["s-lesson","Lesson"],["s-practice","Practice"],["s-simulation","Simulation"],["s-assessment","Assessment"],["s-portfolio","Portfolio"],["s-coach","Coach"]];$("nav").innerHTML=items.map(([id,l])=>`<button data-s="${id}">${l}</button>`).join("");document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>go(b.dataset.s));}
+$("o-save").onclick=()=>{S.profile={target:$("o-target").value||"Support Specialist — Junior",level:$("o-level").value,hours:$("o-hours").value||"6"};S.progress=[{i:0,st:"in-progress"}];go("s-baseline")};
+$("b-save").onclick=()=>{go("s-dashboard")};
+$("l-done").onclick=()=>{S.lessonDone=true;go("s-practice")};
+$("w-submit").onclick=()=>{const v=$("w-draft").value;S.subs.push({v,text:v,at:Date.now()});go("s-assessment");$("a-draft").value=v;score(true)};
+function levels(text){const t=text.toLowerCase(),w=t.split(/\s+/).filter(Boolean).length,has=(...k)=>k.some(x=>t.includes(x));const lv=(ok,s)=>s?2:ok?1:0;return[
+{n:"Clarity",lv:lv(w>20,w>80),e:w+" words"},
+{n:"Completeness",lv:lv(has("next","will","plan"),has("risk","block","mitigat")&&has("next","will")),e:"keyword coverage"},
+{n:"Tone",lv:lv(!has("fault","blame","stupid"),has("please","thank","apolog")||has("we will","i will")),e:"tone markers"}]}
+function score(fromPractice){
+const text=($("a-draft").value||"").trim();if(!text){$("a-fb").textContent="Write something first.";return}
+const lv=levels(text),avg=lv.reduce((a,s)=>a+s.lv,0)/lv.length;
+const status=avg>=1.5?"DEMONSTRATED":avg>=0.75?"DEVELOPING":"NOT_ASSESSED";
+const ver=S.subs.length+1;S.subs.push({v:ver,text,at:Date.now()});
+$("a-table").innerHTML=`<table><thead><tr><th>Criterion</th><th>Beginning</th><th>Developing</th><th>Demonstrated</th><th>Score</th></tr></thead><tbody>${lv.map(s=>`<tr><th>${s.n}</th><td>Vague/basic</td><td>Partial</td><td>Strong</td><td>${["Beginning","Developing","Demonstrated"][s.lv]} (${s.lv})</td></tr>`).join("")}</tbody></table>`;
+$("a-fb").textContent=`Score ${avg.toFixed(2)} (v${ver}) — ${status==="DEMONSTRATED"?"clarity and tone demonstrated; evidence saved.":"revise and resubmit to improve. Provisional v0 heuristic."}`;
+if(status==="DEMONSTRATED"){
+const cur=S.progress.find(p=>p.st==="in-progress");
+if(cur){cur.st="completed";const nxt=S.progress.find(p=>p.i===cur.i+1)||{i:cur.i+1,st:"locked"};if(!S.progress.find(p=>p.i===cur.i+1))S.progress.push(nxt);const nl=S.progress.find(p=>p.i===cur.i+1);if(nl&&nl.st==="locked")nl.st="in-progress";}
+if(!S.ev.find(e=>e.t.includes("Status-update"))){S.ev.push({t:"Assessment — Status-update writing (Demonstrated)",s:"Source: submission v"+ver+" · score "+avg.toFixed(2)});}
+$("a-unlock").innerHTML=`Milestone complete — evidence saved. <button class="btn sec" data-go="s-path">View path</button> <button class="btn sec" data-go="s-portfolio">View portfolio</button>`;
+}
+persist();render();
+}
+$("a-score").onclick=()=>score(false);
+const SIM0=[{r:"ai",t:"Good afternoon. Delivery slipped by two days. Explain."}];
+function simRender(extra){$("sim-chat").innerHTML=SIM0.concat(extra||[]).map(m=>`<div class="bub ${m.r==="ai"?"ai":"us"}">${m.t}</div>`).join("")}
+let simHist=[];
+$("sim-send").onclick=()=>{const v=$("sim-in").value.trim();if(!v)return;simHist.push({r:"user",t:v});S.simTurns++;
+const done=S.simTurns>=3||/thank|agree|confirm|monday/i.test(v);
+const reply=done?"Alright. Monday 10am. I will hold you to it.":"Hmm. And what exactly happens if it slips again? Give me something concrete.";
+simHist.push({r:"ai",t:reply});simRender(simHist);$("sim-in").value="";if(done)$("sim-fb").textContent="Feedback: you closed with a commitment — good. Name the mitigation earlier next time.";};
+$("sim-finish").onclick=()=>{$("sim-fb").textContent="Feedback: completed simulation. Evidence-worthy when paired with a real task.";};
+const C0=[{r:"ai",t:"I am your LegendRise coach. I answer from your current lesson and approved materials. What are you stuck on?"}];
+function coachRender(extra){$("c-chat").innerHTML=C0.concat(extra||[]).map(m=>`<div class="bub ${m.r==="ai"?"ai":"us"}">${m.t}</div>`).join("")}
+let cHist=[];
+$("c-ask").onclick=()=>{const q=$("c-in").value.trim();if(!q)return;cHist.push({r:"user",t:q});
+const words=new Set(q.toLowerCase().split(/[^a-z0-9]+/).filter(w=>w.length>3));
+const hits=LESSON.split(/(?<=[.!?])\s+/).filter(s=>{let n=0;words.forEach(w=>{if(s.toLowerCase().includes(w))n++});return n>=2}).slice(0,2);
+cHist.push({r:"ai",t:hits.length?hits.join(" ")+" (from your lesson — verify against it)":"I can't find that in this lesson yet — try asking about something the lesson covers."});
+coachRender(cHist);$("c-in").value="";};
+nav();simRender([]);coachRender([]);render();
+</script>
+</body>
+</html>

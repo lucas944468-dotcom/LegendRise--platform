@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LegendRise™ — Design System & Screen Preview</title>
+<style>
+:root{--primary:#14406b;--primary-strong:#0e2f52;--accent:#b8860b;--success:#1a7f4b;--warning:#b45309;--error:#b91c1c;--ink:#1c2b3a;--muted:#52616f;--bg:#f4f6f8;--card:#ffffff;--border:#dbe2e8;--ev:#6d28d9;--locked:#8a97a3;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+*{box-sizing:border-box}body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.5}
+.wrap{max-width:72rem;margin:0 auto;padding:0 1rem}
+header.top{background:var(--primary-strong);color:#fff;border-bottom:3px solid var(--accent)}
+header.top .wrap{display:flex;align-items:center;gap:1rem;padding:.75rem 1rem;flex-wrap:wrap}
+.brand{font-weight:700;font-size:1.125rem}.brand span{color:var(--accent)}
+nav.links{display:flex;gap:.5rem;margin-left:auto;flex-wrap:wrap}
+nav.links a{color:#d6e2ee;text-decoration:none;font-size:.875rem;font-weight:600;padding:.25rem .75rem;border-radius:9999px}
+nav.links a:hover{background:rgb(255 255 255/.14);color:#fff}
+main{padding:1.5rem 0 3rem}section.card{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:0 1px 2px 0 rgb(0 0 0/.05);padding:1.25rem;margin-bottom:1rem}
+h1{font-size:1.875rem;color:var(--primary);margin:0 0 .5rem}h2{font-size:1.25rem;color:var(--primary);margin:0 0 .5rem}h3{font-size:1rem;margin:1rem 0 .5rem}
+.muted{color:var(--muted);font-size:.875rem}.mono{font-family:var(--mono);font-size:.85rem}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.75rem}
+.swatch{border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.swatch i{display:block;height:56px}.swatch div{padding:.4rem .6rem;font-size:.8rem}
+table{width:100%;border-collapse:collapse;font-size:.875rem}th,td{border:1px solid var(--border);padding:.4rem .6rem;text-align:left}th{background:var(--bg)}
+.btn{display:inline-block;border:1px solid transparent;border-radius:8px;padding:.5rem 1.25rem;font-weight:600;text-decoration:none;cursor:pointer;font-size:1rem;margin:.15rem}
+.btn-p{background:var(--primary);color:#fff}.btn-s{background:#fff;border-color:var(--border);color:var(--primary)}.btn-d{background:var(--error);color:#fff}
+.badge{display:inline-block;font-size:.75rem;font-weight:700;padding:.25rem .75rem;border-radius:9999px;color:#fff;margin:.15rem}
+.b-c{background:var(--success)}.b-p{background:var(--primary)}.b-l{background:var(--locked)}.b-n{background:var(--warning)}.b-e{background:var(--ev)}
+.bar{height:.625rem;background:var(--border);border-radius:9999px;overflow:hidden}.bar>span{display:block;height:100%;background:var(--primary)}
+.bubble{max-width:85%;padding:.6rem .9rem;border-radius:12px;margin:.4rem 0}.b-ai{background:#fff;border:1px solid var(--border)}.b-u{background:var(--primary);color:#fff;margin-left:auto}
+input,select,textarea{font:inherit;padding:.5rem .75rem;border:1px solid var(--border);border-radius:8px;width:100%;background:#fff}
+label{font-weight:600;font-size:.875rem;display:block;margin:.6rem 0 .25rem}
+.hero{text-align:center;padding:2rem 0}.hero h1{font-size:2rem}.hero h1:after{content:"";display:block;width:4.5rem;height:4px;background:var(--accent);border-radius:9999px;margin:.75rem auto 0}
+.grid{display:grid;gap:1rem;grid-template-columns:1fr}@media(min-width:640px){.grid2{grid-template-columns:1fr 1fr}}@media(min-width:1024px){.grid3{grid-template-columns:1fr 1fr 1fr}}
+footer{background:var(--primary-strong);color:#d6e2ee;border-top:3px solid var(--accent);margin-top:2rem}
+footer .wrap{padding:1.25rem 1rem;font-size:.875rem}
+.type-row{display:flex;align-items:baseline;gap:1rem;border-bottom:1px dashed var(--border);padding:.35rem 0}
+kbd{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:0 .4rem;font-family:var(--mono);font-size:.8rem}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><span class="brand">LegendRise™ <span>design system</span></span><nav class="links"><a href="#tokens">Tokens</a><a href="#components">Components</a><a href="#screens">Screens</a><a href="#notes">Notes</a></nav></div></header>
+<main class="wrap">
+<div class="hero"><h1>Premium, calm, modern education UI</h1><p class="muted">Ink navy + muted gold · system fonts · 4px spacing · WCAG 2.1 AA · v2.1</p></div>
+
+<section class="card" id="tokens"><h2>1 · Color tokens</h2>
+<div class="swatches">
+<div class="swatch"><i style="background:#14406b"></i><div><b>--color-primary</b><br><span class="mono">#14406b</span> · actions, links, focus</div></div>
+<div class="swatch"><i style="background:#0e2f52"></i><div><b>--color-primary-strong</b><br><span class="mono">#0e2f52</span> · hover, header</div></div>
+<div class="swatch"><i style="background:#b8860b"></i><div><b>--color-accent</b><br><span class="mono">#b8860b</span> · highlights, totals</div></div>
+<div class="swatch"><i style="background:#1a7f4b"></i><div><b>--color-success</b><br><span class="mono">#1a7f4b</span> · demonstrated</div></div>
+<div class="swatch"><i style="background:#b45309"></i><div><b>--color-warning</b><br><span class="mono">#b45309</span> · needs attention</div></div>
+<div class="swatch"><i style="background:#b91c1c"></i><div><b>--color-error</b><br><span class="mono">#b91c1c</span> · destructive</div></div>
+<div class="swatch"><i style="background:#6d28d9"></i><div><b>--state-evidence</b><br><span class="mono">#6d28d9</span> · evidence</div></div>
+<div class="swatch"><i style="background:#8a97a3"></i><div><b>--state-locked</b><br><span class="mono">#8a97a3</span> · locked</div></div>
+<div class="swatch"><i style="background:#1c2b3a"></i><div><b>--color-text-primary</b><br><span class="mono">#1c2b3a</span> · body text</div></div>
+<div class="swatch"><i style="background:#f4f6f8;border-bottom:1px solid #dbe2e8"></i><div><b>--color-surface-alt</b><br><span class="mono">#f4f6f8</span> · page bg</div></div>
+</div>
+<h3>Type scale (system stack)</h3>
+<div class="type-row"><span class="muted">--text-xs .75rem</span><span style="font-size:.75rem">Captions, badges</span></div>
+<div class="type-row"><span class="muted">--text-sm .875rem</span><span style="font-size:.875rem">Secondary text, timestamps</span></div>
+<div class="type-row"><span class="muted">--text-base 1rem</span><span style="font-size:1rem">Body text, inputs</span></div>
+<div class="type-row"><span class="muted">--text-xl 1.25rem</span><span style="font-size:1.25rem">Section headings</span></div>
+<div class="type-row"><span class="muted">--text-2xl 1.5rem</span><span style="font-size:1.5rem">Card values</span></div>
+<div class="type-row"><span class="muted">--text-3xl 1.875rem</span><span style="font-size:1.875rem">Dashboard totals</span></div>
+<h3>Spacing / radius / shadow</h3>
+<p class="mono">--space-1 .25rem · --space-2 .5rem · --space-4 1rem · --space-8 2rem (4px base) &nbsp;|&nbsp; radius sm 4px · md 8px · lg 12px · full 9999px &nbsp;|&nbsp; shadows sm / md / lg</p>
+</section>
+<section class="card" id="components"><h2>2 · Components</h2>
+<h3>Buttons</h3>
+<p><a class="btn btn-p">Start now</a><a class="btn btn-s">Preview rubric</a><a class="btn btn-d">Delete</a></p>
+<h3>Milestone states (must stay visually distinct — PRD §13.2)</h3>
+<p><span class="badge b-c">Completed</span><span class="badge b-p">In progress</span><span class="badge b-l">Locked</span><span class="badge b-n">Needs attention</span><span class="badge b-e">Evidence</span></p>
+<h3>Progress</h3><div class="bar" role="img" aria-label="Path progress 40 percent"><span style="width:40%"></span></div>
+<h3>Rubric table</h3>
+<table><caption class="muted">Status-update rubric with sample scores</caption><thead><tr><th>Criterion</th><th>Beginning</th><th>Developing</th><th>Demonstrated</th><th>Score</th></tr></thead><tbody>
+<tr><th>Clarity</th><td>Vague</td><td>Mostly clear</td><td>Crisp and scannable</td><td>Demonstrated</td></tr>
+<tr><th>Completeness</th><td>Missing parts</td><td>Covers most</td><td>Progress + next + risk</td><td>Developing</td></tr>
+<tr><th>Tone</th><td>Defensive</td><td>Neutral</td><td>Owning and calm</td><td>Demonstrated</td></tr></tbody></table>
+<h3>Chat</h3>
+<div class="bubble b-ai">Good afternoon. Delivery slipped by two days. Explain.</div>
+<div class="bubble b-u">You are right — we slipped because testing caught a data issue. Delivery Monday 10am.</div>
+<h3>Form fields</h3>
+<label for="d1">Target career and level</label><input id="d1" value="Support Specialist — Junior">
+<label for="d2">Weekly availability (hours)</label><input id="d2" value="6">
+</section>
+
+<section class="card" id="screens"><h2>3 · Screen previews (static)</h2>
+<h3>Dashboard — one next action, progress, evidence snapshot</h3>
+<div style="border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1rem">
+<p><b>Next action:</b> Complete Practice: Draft a client status update <a class="btn btn-p" style="font-size:.875rem;padding:.25rem .75rem">Start now</a></p>
+<div class="bar"><span style="width:40%"></span></div>
+<p><span class="badge b-e">Evidence</span> Practice 2.3 — Support ticket triage <span class="muted">· Source: Practice submission</span></p>
+</div>
+<h3>Career Path — ordered milestones with states</h3>
+<p><span class="badge b-c">Completed</span> Milestone 1 — Foundations: workplace communication</p>
+<p><span class="badge b-c">Completed</span> Milestone 2 — Core tools and workflows</p>
+<p><span class="badge b-p">In progress</span> Milestone 3 — First supervised tasks · <a href="#screens">Continue learning</a></p>
+<p><span class="badge b-l">Locked</span> Milestone 4 — Independent delivery</p>
+<p><span class="badge b-l">Locked</span> Milestone 5 — Portfolio &amp; readiness review</p>
+<h3>Assessment — task, rubric, feedback, evidence</h3>
+<p><b>Task:</b> Draft a max-150-word client status update. <b>Score 1.67</b> — clarity and tone demonstrated; add the risk mitigation. <span class="badge b-e">Evidence</span> saved to portfolio. Next unlocked: <b>Independent delivery</b>.</p>
+</section>
+
+<section class="card" id="notes"><h2>4 · Responsive, accessibility &amp; build notes</h2>
+<ul>
+<li><b>Breakpoints:</b> mobile &lt; 640px (single column) · tablet 640–1024px (2 col) · desktop &gt; 1024px (3 col). Core journey works on desktop and mobile web before any native app.</li>
+<li><b>Accessibility (WCAG 2.1 AA):</b> labelled fields, focus-visible rings, <kbd>Esc</kbd> closes dialogs, <span class="mono">role="progressbar/alert/dialog"</span>, live regions for dynamic updates, reduced-motion respected.</li>
+<li><b>Framework:</b> SvelteKit 2 + Svelte 5 (no React) · <b>Database:</b> local PostgreSQL 16 + Prisma · <b>Accounts:</b> Better Auth (email + verification) · <b>Storage:</b> Cloudflare R2.</li>
+<li><b>Phases:</b> P1 MVP one career → P2 depth → P3 Venture Lab + polish → P4 future. Current: Phase 3 build, journey verified on Postgres.</li>
+<li><b>Prototype files:</b> <span class="mono">index.html</span> (standalone clickable demo, no server) · <span class="mono">design.html</span> (this file).</li>
+</ul>
+</section>
+</main>
+<footer><div class="wrap">LegendRise™ Career &amp; Venture OS · Design preview v2.1 · ink navy + muted gold · <span class="muted">moves with PRD.md + index.html</span></div></footer>
+</body>
+</html>
