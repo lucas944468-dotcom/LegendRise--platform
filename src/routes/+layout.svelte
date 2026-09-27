@@ -3,6 +3,7 @@
   let { children } = $props();
   const links = [
     ["Onboarding", "/onboarding"],
+    ["Baseline", "/baseline"],
     ["Dashboard", "/dashboard"],
     ["Path", "/path"],
     ["Lesson", "/lesson"],
@@ -11,6 +12,7 @@
     ["Assessment", "/assessment"],
     ["Portfolio", "/portfolio"],
     ["Coach", "/coach"],
+    ["Login", "/login"],
   ] as const;
 </script>
 

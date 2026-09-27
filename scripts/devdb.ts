@@ -6,6 +6,7 @@
 // Then in another shell with DATABASE_URL=postgresql://legendrise:legendrise@127.0.0.1:5433/legendrise:
 //   npm run prisma:migrate && npm run prisma:seed && npx vitest run
 import EmbeddedPostgres from "embedded-postgres";
+import { existsSync } from "node:fs";
 
 const pg = new EmbeddedPostgres({
   databaseDir: "./data/devpg",
@@ -15,7 +16,13 @@ const pg = new EmbeddedPostgres({
   persistent: true,
 });
 
-await pg.initialise();
+// initialise() runs initdb — only valid on a FRESH data dir. Skip when the
+// cluster already exists (idempotent restarts, e.g. after a stale lock clear).
+if (!existsSync("./data/devpg/PG_VERSION")) {
+  await pg.initialise();
+} else {
+  console.log("Existing cluster found — skipping initdb.");
+}
 await pg.start();
 console.log("Embedded Postgres up: postgresql://legendrise:legendrise@127.0.0.1:5433/legendrise");
 console.log("Press Ctrl+C to stop (data persists in ./data/devpg).");

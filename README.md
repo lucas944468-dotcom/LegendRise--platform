@@ -9,7 +9,7 @@ LegendRise™ is a capability development and venture progression platform that 
 - **Email:** Resend (auth verification/reset)
 
 ## Quickstart (after founder manual setup)
-1. Install PostgreSQL 16/17 → create `legendrise` DB → copy `.env.example` to `.env` and fill values
+1. Install PostgreSQL 16/17 → create `legendrise` DB → copy `.env.example` to `.env` and fill values (pick **UTF8** encoding at install; avoids WIN1252 character errors)
 2. `npm install`
 3. `npm run prisma:migrate` (applies migrations) — seed runs automatically
 4. `npm run dev` → http://localhost:5173
