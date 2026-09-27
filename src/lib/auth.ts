@@ -9,6 +9,12 @@ export const auth = betterAuth({
   secret: BETTER_AUTH_SECRET,
   baseURL: BETTER_AUTH_URL,
   database: prismaAdapter(prisma, { provider: "postgresql" }),
+  user: {
+    // Exposes the Prisma isAdmin flag on session.user (typed).
+    additionalFields: {
+      isAdmin: { type: "boolean", required: false, defaultValue: false, input: false },
+    },
+  },
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: true,
