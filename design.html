@@ -1,11 +1,11 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>LegendRise™ — Design System & Screen Preview</title>
 <style>
-:root{--primary:#14406b;--primary-strong:#0e2f52;--accent:#b8860b;--success:#1a7f4b;--warning:#b45309;--error:#b91c1c;--ink:#1c2b3a;--muted:#52616f;--bg:#f4f6f8;--card:#ffffff;--border:#dbe2e8;--ev:#6d28d9;--locked:#8a97a3;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+:root{--primary:#6d28d9;--primary-strong:#5b21b6;--accent:#f59e0b;--success:#16a34a;--warning:#d97706;--error:#dc2626;--ink:#1e1b4b;--muted:#5b5878;--bg:#f5f3ff;--card:#ffffff;--border:#e3ddf7;--ev:#a21caf;--locked:#a8a3c7;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
 *{box-sizing:border-box}body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.5}
 .wrap{max-width:72rem;margin:0 auto;padding:0 1rem}
 header.top{background:var(--primary-strong);color:#fff;border-bottom:3px solid var(--accent)}
@@ -40,20 +40,20 @@ kbd{background:var(--bg);border:1px solid var(--border);border-radius:4px;paddin
 <body>
 <header class="top"><div class="wrap"><span class="brand">LegendRise™ <span>design system</span></span><nav class="links"><a href="#tokens">Tokens</a><a href="#components">Components</a><a href="#screens">Screens</a><a href="#notes">Notes</a></nav></div></header>
 <main class="wrap">
-<div class="hero"><h1>Premium, calm, modern education UI</h1><p class="muted">Ink navy + muted gold · system fonts · 4px spacing · WCAG 2.1 AA · v2.1</p></div>
+<div class="hero"><h1>Premium, calm, modern education UI</h1><p class="muted">Rich violet + warm gold · system fonts · 4px spacing · WCAG 2.1 AA · v2.1</p></div>
 
 <section class="card" id="tokens"><h2>1 · Color tokens</h2>
 <div class="swatches">
-<div class="swatch"><i style="background:#14406b"></i><div><b>--color-primary</b><br><span class="mono">#14406b</span> · actions, links, focus</div></div>
-<div class="swatch"><i style="background:#0e2f52"></i><div><b>--color-primary-strong</b><br><span class="mono">#0e2f52</span> · hover, header</div></div>
-<div class="swatch"><i style="background:#b8860b"></i><div><b>--color-accent</b><br><span class="mono">#b8860b</span> · highlights, totals</div></div>
-<div class="swatch"><i style="background:#1a7f4b"></i><div><b>--color-success</b><br><span class="mono">#1a7f4b</span> · demonstrated</div></div>
-<div class="swatch"><i style="background:#b45309"></i><div><b>--color-warning</b><br><span class="mono">#b45309</span> · needs attention</div></div>
-<div class="swatch"><i style="background:#b91c1c"></i><div><b>--color-error</b><br><span class="mono">#b91c1c</span> · destructive</div></div>
-<div class="swatch"><i style="background:#6d28d9"></i><div><b>--state-evidence</b><br><span class="mono">#6d28d9</span> · evidence</div></div>
-<div class="swatch"><i style="background:#8a97a3"></i><div><b>--state-locked</b><br><span class="mono">#8a97a3</span> · locked</div></div>
-<div class="swatch"><i style="background:#1c2b3a"></i><div><b>--color-text-primary</b><br><span class="mono">#1c2b3a</span> · body text</div></div>
-<div class="swatch"><i style="background:#f4f6f8;border-bottom:1px solid #dbe2e8"></i><div><b>--color-surface-alt</b><br><span class="mono">#f4f6f8</span> · page bg</div></div>
+<div class="swatch"><i style="background:#6d28d9"></i><div><b>--color-primary</b><br><span class="mono">#6d28d9</span> · actions, links, focus</div></div>
+<div class="swatch"><i style="background:#5b21b6"></i><div><b>--color-primary-strong</b><br><span class="mono">#5b21b6</span> · hover, header</div></div>
+<div class="swatch"><i style="background:#f59e0b"></i><div><b>--color-accent</b><br><span class="mono">#f59e0b</span> · highlights, totals</div></div>
+<div class="swatch"><i style="background:#16a34a"></i><div><b>--color-success</b><br><span class="mono">#16a34a</span> · demonstrated</div></div>
+<div class="swatch"><i style="background:#d97706"></i><div><b>--color-warning</b><br><span class="mono">#d97706</span> · needs attention</div></div>
+<div class="swatch"><i style="background:#dc2626"></i><div><b>--color-error</b><br><span class="mono">#dc2626</span> · destructive</div></div>
+<div class="swatch"><i style="background:#a21caf"></i><div><b>--state-evidence</b><br><span class="mono">#a21caf</span> · evidence</div></div>
+<div class="swatch"><i style="background:#a8a3c7"></i><div><b>--state-locked</b><br><span class="mono">#a8a3c7</span> · locked</div></div>
+<div class="swatch"><i style="background:#1e1b4b"></i><div><b>--color-text-primary</b><br><span class="mono">#1e1b4b</span> · body text</div></div>
+<div class="swatch"><i style="background:#f5f3ff;border-bottom:1px solid #dbe2e8"></i><div><b>--color-surface-alt</b><br><span class="mono">#f5f3ff</span> · page bg</div></div>
 </div>
 <h3>Type scale (system stack)</h3>
 <div class="type-row"><span class="muted">--text-xs .75rem</span><span style="font-size:.75rem">Captions, badges</span></div>

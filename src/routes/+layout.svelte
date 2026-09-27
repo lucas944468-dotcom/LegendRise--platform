@@ -19,8 +19,15 @@
 <a class="lr-skip" href="#main">Skip to content</a>
 <header class="lr-header">
   <div class="lr-header-inner">
-    <a class="lr-brand" href="/">LegendRise™ <span class="lr-muted">prototype</span></a>
-    <nav class="lr-nav" aria-label="Prototype screens">
+    <a class="lr-brand" href="/">LegendRise™</a>
+    <span class="lr-search" role="search">Search skills, tools, templates…</span>
+    <nav class="lr-nav" aria-label="Account">
+      <a href="/login">Login</a>
+      <a class="lr-nav-cta" href="/signup">Get Started →</a>
+    </nav>
+  </div>
+  <div class="lr-header-inner" style="padding-top:0">
+    <nav class="lr-nav" style="margin-left:0" aria-label="Prototype screens">
       {#each links as [label, href]}<a {href}>{label}</a>{/each}
     </nav>
   </div>
