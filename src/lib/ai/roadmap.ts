@@ -1,4 +1,5 @@
 import { z } from "zod";
+// (rules-based; no model call)
 
 // Roadmap engine: starting profile + career template → ordered milestones + actions.
 // Control: approved pathway data only (PRD §11). Implemented in Phase 6.
@@ -14,6 +15,17 @@ export const RoadmapOutput = z.object({
 });
 export type RoadmapInput = z.infer<typeof RoadmapInput>;
 export type RoadmapOutput = z.infer<typeof RoadmapOutput>;
-export async function runRoadmap(_input: RoadmapInput): Promise<RoadmapOutput> {
-  throw new Error("Phase 6: roadmap not implemented");
+export async function runRoadmap(input: RoadmapInput): Promise<RoadmapOutput> {
+  const { prisma } = await import("../db");
+  const milestones = await prisma.milestone.findMany({
+    where: { careerPathId: input.careerPathId },
+    orderBy: { order: "asc" },
+  });
+  return {
+    milestones: milestones.map((m) => ({
+      milestoneId: m.id,
+      order: m.order,
+      reason: input.gaps.length > 0 ? `Stage ${m.order}: targets gap area` : `Stage ${m.order} of pathway`,
+    })),
+  };
 }

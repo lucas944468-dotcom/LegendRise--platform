@@ -37,6 +37,34 @@ async function main() {
         objectives: { objectives: [] },
       },
     });
+    if (i === 0) {
+      await prisma.lesson.upsert({
+        where: { id: `placeholder-lesson-m1` },
+        update: {},
+        create: {
+          id: `placeholder-lesson-m1`,
+          milestoneId: m.id,
+          title: "Lesson 1.1 — What good workplace communication looks like",
+          text: "Clear workplace communication is short, specific, and owned. Say what changed, what happens next, and who owns it. Vague updates create follow-up meetings; crisp updates prevent them.",
+          resources: { items: ["Communication checklist (download)", "Worked example: vague vs crisp update"] },
+          isPublished: true,
+        },
+      });
+    }
+    if (i === 1) {
+      await prisma.lesson.upsert({
+        where: { id: `placeholder-lesson-m2` },
+        update: {},
+        create: {
+          id: `placeholder-lesson-m2`,
+          milestoneId: m.id,
+          title: "Lesson 2.1 — Tools of the trade: inbox, sheets, tracker",
+          text: "You will live in three tools: the shared inbox, the tracker, and a sheet for numbers. Rules: inbox to zero daily, tracker updated before standup, numbers only from the sheet.",
+          resources: { items: ["Inbox triage checklist (download)", "Tracker field guide"] },
+          isPublished: true,
+        },
+      });
+    }
     if (i === 2) {
       await prisma.lesson.upsert({
         where: { id: `placeholder-lesson-m3` },

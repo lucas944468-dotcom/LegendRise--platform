@@ -1,4 +1,5 @@
 import { z } from "zod";
+// (deterministic, evidence-based; no model call)
 
 // Next-step recommender: progress + scores + unfinished tasks → next milestone + reason.
 // Control: evidence-based rule (PRD §11). Implemented in Phase 6.
@@ -14,6 +15,17 @@ export const RecommenderOutput = z.object({
 });
 export type RecommenderInput = z.infer<typeof RecommenderInput>;
 export type RecommenderOutput = z.infer<typeof RecommenderOutput>;
-export async function runRecommender(_input: RecommenderInput): Promise<RecommenderOutput> {
-  throw new Error("Phase 6: recommender not implemented");
+export async function runRecommender(input: RecommenderInput): Promise<RecommenderOutput> {
+  const pick =
+    input.progress.find((p) => p.status === "IN_PROGRESS") ??
+    input.progress.find((p) => p.status === "LOCKED");
+  if (!pick) throw new Error("No milestones available");
+  const { prisma } = await import("../db");
+  const m = await prisma.milestone.findUnique({ where: { id: pick.milestoneId } });
+  const name = m?.title ?? pick.milestoneId;
+  return {
+    nextMilestoneId: pick.milestoneId,
+    reason:
+      pick.status === "IN_PROGRESS" ? `Continue current work: ${name}` : `Next stage unlocked: ${name}`,
+  };
 }

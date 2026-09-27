@@ -3,6 +3,8 @@ import type { Actions, PageServerLoad } from "./$types";
 import { prisma } from "$lib/db";
 import { requireUserId } from "$lib/access";
 import { ensureRoadmap } from "$lib/roadmap";
+import { runAssessor } from "$lib/ai/assessor";
+import { track } from "$lib/analytics";
 
 // FR-004 / CAR-02: short diagnostic. Responses stored on the profile;
 // gaps + uncertainty flagged (v0 heuristic); roadmap sequenced after.
@@ -27,13 +29,31 @@ export const actions: Actions = {
     if (!userId) redirect(302, "/login");
     const data = await event.request.formData();
     const responses = QUESTIONS.map((q) => ({ questionId: q.id, answer: String(data.get(q.id) ?? "") }));
-    const joined = responses.map((r) => r.answer).join(" ").toLowerCase();
-    const level = /often|confident|3\+|2\+/.test(joined) ? "Developing" : "Starting";
+    const profile = await prisma.profile.findUniqueOrThrow({ where: { userId } });
+    // Assessor service (AI when configured, deterministic v0 otherwise).
+    const assessed = await runAssessor({
+      userId,
+      goalType: profile.goalType,
+      targetRole: profile.targetRole ?? undefined,
+      responses,
+      experience: profile.experience ?? undefined,
+    }).catch(() => null);
+    const level = assessed?.currentLevel ?? "Starting";
     await prisma.profile.update({
       where: { userId },
-      data: { preferences: { baselineResponses: responses, estimatedLevel: level, takenAt: new Date().toISOString() } },
+      data: {
+        preferences: {
+          baselineResponses: responses,
+          estimatedLevel: level,
+          gaps: assessed?.gaps ?? [],
+          uncertainties: assessed?.uncertainties ?? [],
+          takenAt: new Date().toISOString(),
+        },
+      },
     });
     await ensureRoadmap(userId);
+    await track("assessment_completed", userId);
+    await track("roadmap_viewed", userId);
     redirect(303, "/dashboard");
   },
 };

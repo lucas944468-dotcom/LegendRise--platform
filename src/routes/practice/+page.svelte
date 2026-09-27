@@ -2,23 +2,22 @@
   import Button from "$lib/components/Button.svelte";
   import Card from "$lib/components/Card.svelte";
   import Field from "$lib/components/Field.svelte";
-  import { mockPractice } from "$lib/mock";
-  let submitted = $state(false);
+  import EmptyState from "$lib/components/EmptyState.svelte";
+  let { data } = $props();
 </script>
 
-<h1>{mockPractice.title}</h1>
+<h1>Practice</h1>
 
-<Card title="Brief"><p>{mockPractice.brief}</p></Card>
-
-<Card title="Hints">
-  <ul>{#each mockPractice.hints as h}<li>{h}</li>{/each}</ul>
-</Card>
-
-<Card title="Your work">
-  {#if submitted}
-    <p role="status"><strong>Submitted.</strong> In the built product this goes to rubric assessment. <a href="/assessment">See how it is scored</a>.</p>
-  {:else}
-    <Field label="Draft (max ~150 words)" name="draft"><textarea id="draft" name="draft" rows="6"></textarea></Field>
-    <Button type="button" onclick={() => (submitted = true)}>Submit work</Button>
-  {/if}
-</Card>
+{#if !data.brief}
+  <EmptyState title="No practice task yet" hint="Publish an assessment for your current milestone first." />
+{:else}
+  <Card title="Brief"><p>{data.brief}</p></Card>
+  <Card title="Your work">
+    <form method="post" action="?/submit">
+      <input type="hidden" name="assessmentId" value={data.assessmentId} />
+      <Field label="Draft" name="draft"><textarea id="draft" name="draft" rows="6" required></textarea></Field>
+      <Button type="submit">Submit work</Button>
+    </form>
+    <p class="lr-muted">Submitting stores a versioned draft; scoring happens on the assessment page.</p>
+  </Card>
+{/if}

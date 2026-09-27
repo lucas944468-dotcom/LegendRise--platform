@@ -32,6 +32,6 @@
   <div class="lr-footer-inner">
     <strong>LegendRise™</strong>
     <span>Career & Venture OS — prototype with mock data.</span>
-    <span style="margin-left:auto"><a href="/portfolio">Evidence</a> · <a href="/coach">Coach</a> · <a href="/dashboard">Dashboard</a></span>
+    <span style="margin-left:auto"><a href="/portfolio">Evidence</a> · <a href="/coach">Coach</a> · <a href="/dashboard">Dashboard</a> · <a href="/support">Support</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></span>
   </div>
 </footer>

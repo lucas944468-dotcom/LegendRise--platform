@@ -293,3 +293,26 @@ model Subscription {
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 }
+
+// Phase 9: product analytics (§17 taxonomy). Local-first store; PostHog
+// forwarding plugs in here when a key exists (ADR-008).
+model AnalyticsEvent {
+  id        String   @id @default(cuid())
+  userId    String?
+  event     String
+  props     Json?
+  createdAt DateTime @default(now())
+
+  @@index([event, createdAt])
+}
+
+// Phase 10: user problem / incorrect-AI-feedback reports (§22 support gate).
+model SupportReport {
+  id        String   @id @default(cuid())
+  userId    String?
+  kind      String // bug | incorrect-ai | other
+  context   String?
+  message   String   @db.Text
+  status    String   @default("OPEN")
+  createdAt DateTime @default(now())
+}
