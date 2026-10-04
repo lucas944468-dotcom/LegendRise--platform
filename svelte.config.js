@@ -1,6 +1,6 @@
-import adapter from "@sveltejs/adapter-node";
+import adapter from "@sveltejs/adapter-netlify";
 
-/** Self-hosted Node output for local device now, VPS later (ADR-1). */
+/** Netlify deployment (Functions + static output). Local `vite dev` unaffected. */
 const config = {
   kit: {
     adapter: adapter(),

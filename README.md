@@ -14,6 +14,12 @@ LegendRise™ is a capability development and venture progression platform that 
 3. `npm run prisma:migrate` (applies migrations) — seed runs automatically
 4. `npm run dev` → http://localhost:5173
 
+## Deploy (Netlify)
+- `netlify.toml` pins build `npm run build`, publish `build`, Node 22
+- Dashboard must set (Site settings → Environment): `BETTER_AUTH_SECRET`,
+  `BETTER_AUTH_URL` (both REQUIRED at build time), `DATABASE_URL`, `DIRECT_URL`
+- Optional until used: `RESEND_API_KEY`, `EMAIL_FROM`, `R2_*`, `OPENAI_API_KEY`
+
 ## Rules (PRD non-negotiables)
 - The product is the progression engine, not the course library
 - Every server query on user-owned data is scoped by session (`lib/access.ts`) — no RLS safety net

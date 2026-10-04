@@ -1,0 +1,18 @@
+# Netlify deployment (SvelteKit + adapter-netlify).
+# Dashboard must match: Build command `npm run build`, Publish directory `build`.
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Functions (SSR/API routes) are emitted by adapter-netlify automatically.
+# Required environment variables (Site settings → Environment):
+#   BETTER_AUTH_SECRET  (generate fresh; REQUIRED at build time)
+#   BETTER_AUTH_URL     (https://<site>.netlify.app; REQUIRED at build time)
+#   DATABASE_URL        (pooled Postgres string; required at runtime)
+#   DIRECT_URL          (direct string; for `prisma migrate deploy`)
+# Optional until their features are used:
+#   RESEND_API_KEY, EMAIL_FROM, R2_ACCOUNT_ID, R2_ACCESS_KEY_ID,
+#   R2_SECRET_ACCESS_KEY, R2_BUCKET, R2_PUBLIC_URL, OPENAI_API_KEY
