@@ -2,6 +2,7 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { BETTER_AUTH_SECRET, BETTER_AUTH_URL } from "$env/static/private";
 import { prisma } from "./db";
+import { sendMail } from "./email";
 
 // Better Auth server instance (ADR-3). Secrets come from $env/static/private
 // so they are statically available at build AND runtime (never shipped to client).
@@ -18,22 +19,25 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: true,
+    // Password reset via the same Resend sender. Better Auth supplies the
+    // one-time reset `url`; the /reset-password page completes the flow.
+    sendResetPassword: async ({ user, url }) => {
+      await sendMail({
+        to: user.email,
+        subject: "Reset your LegendRise password",
+        text: `Reset your LegendRise password with this one-time link (expires in 1 hour):\n\n${url}\n\nIf you did not request this, ignore this email.`,
+      });
+    },
   },
   emailVerification: {
     sendOnSignUp: true,
     autoSignInAfterVerification: true,
+    // Better Auth generates the `url`; we only deliver it. Never disabled.
     sendVerificationEmail: async ({ user, url }) => {
-      if (!process.env.RESEND_API_KEY) {
-        console.log(`[dev] Verify ${user.email}: ${url}`);
-        return;
-      }
-      const { Resend } = await import("resend");
-      const resend = new Resend(process.env.RESEND_API_KEY);
-      await resend.emails.send({
-        from: process.env.EMAIL_FROM ?? "LegendRise <noreply@example.com>",
+      await sendMail({
         to: user.email,
         subject: "Verify your LegendRise account",
-        text: `Welcome to LegendRise! Verify your account: ${url}`,
+        text: `Welcome to LegendRise! Verify your account with this link:\n\n${url}`,
       });
     },
   },

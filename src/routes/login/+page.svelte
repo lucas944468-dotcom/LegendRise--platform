@@ -28,5 +28,5 @@
     {#if error}<p class="lr-field-error" role="alert">{error}</p>{/if}
     <Button type="submit">Log in</Button>
   </form>
-  <p class="lr-muted">No account? <a href="/signup">Sign up</a></p>
+  <p class="lr-muted">No account? <a href="/signup">Sign up</a> · <a href="/forgot-password">Forgot password?</a></p>
 </Card>
