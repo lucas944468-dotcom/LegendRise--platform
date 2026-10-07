@@ -9,8 +9,8 @@
 
 # Functions (SSR/API routes) are emitted by adapter-netlify automatically.
 # Required environment variables (Site settings → Environment):
-#   BETTER_AUTH_SECRET  (generate fresh; REQUIRED at build time)
-#   BETTER_AUTH_URL     (https://<site>.netlify.app; REQUIRED at build time)
+#   BETTER_AUTH_SECRET  (generate fresh; required at runtime in Functions scope)
+#   BETTER_AUTH_URL     (site origin; required at runtime in Functions scope)
 #   DATABASE_URL        (pooled Postgres string; required at runtime)
 #   DIRECT_URL          (direct string; for `prisma migrate deploy`)
 # Optional until their features are used:

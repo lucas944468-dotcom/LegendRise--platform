@@ -17,7 +17,10 @@ LegendRise™ is a capability development and venture progression platform that 
 ## Deploy (Netlify)
 - `netlify.toml` pins build `npm run build`, publish `build`, Node 22
 - Dashboard must set (Site settings → Environment): `BETTER_AUTH_SECRET`,
-  `BETTER_AUTH_URL` (both REQUIRED at build time), `DATABASE_URL`, `DIRECT_URL`
+  `BETTER_AUTH_URL` (both required at runtime in the Functions scope for production
+  and deploy previews), `DATABASE_URL`, `DIRECT_URL`
+- Auth initializes on the first request, not during build analysis. Missing auth
+  configuration rejects requests rather than using a default secret.
 - Optional until used: `RESEND_API_KEY`, `EMAIL_FROM`, `R2_*`, `OPENAI_API_KEY`
 
 ## Rules (PRD non-negotiables)
