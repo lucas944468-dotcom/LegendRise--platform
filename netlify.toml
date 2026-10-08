@@ -8,11 +8,15 @@
   NODE_VERSION = "22"
 
 # Functions (SSR/API routes) are emitted by adapter-netlify automatically.
-# Required environment variables (Site settings → Environment):
-#   BETTER_AUTH_SECRET  (generate fresh; REQUIRED at build time)
-#   BETTER_AUTH_URL     (https://<site>.netlify.app; REQUIRED at build time)
+# Configure these in the dashboard; comments below do not set their values.
+# Required environment variables (Site configuration → Environment variables):
+#   BETTER_AUTH_SECRET  (strong random secret; keep stable; required at runtime)
+#   BETTER_AUTH_URL     (https://<site>.netlify.app; required at runtime)
 #   DATABASE_URL        (pooled Postgres string; required at runtime)
-#   DIRECT_URL          (direct string; for `prisma migrate deploy`)
+# Auth variables need Functions scope in the deployed context.
+# Auth initializes on runtime requests, not during build-time module analysis.
+# DATABASE_URL needs Functions scope for server-side queries.
+# DIRECT_URL is not referenced by the current Prisma schema.
 # Optional until their features are used:
 #   RESEND_API_KEY, EMAIL_FROM, R2_ACCOUNT_ID, R2_ACCESS_KEY_ID,
 #   R2_SECRET_ACCESS_KEY, R2_BUCKET, R2_PUBLIC_URL, OPENAI_API_KEY

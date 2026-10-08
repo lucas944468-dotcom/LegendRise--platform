@@ -1,11 +1,11 @@
-import { auth } from "./auth";
+import { getAuth } from "./auth";
 
 // Central authorization helpers (non-negotiable #8 — no RLS safety net).
 // RULE: every server load / API route on user-owned data must call
 // requireUserId() and scope its Prisma query with `where: { userId }`.
 
 export async function requireUserId(event: { request: Request }): Promise<string> {
-  const session = await auth.api.getSession({ headers: event.request.headers });
+  const session = await getAuth().api.getSession({ headers: event.request.headers });
   if (!session?.user) throw new Error("UNAUTHORIZED");
   return session.user.id;
 }
@@ -16,7 +16,7 @@ export function whereUser(userId: string) {
 }
 
 export async function requireAdminId(event: { request: Request }): Promise<string> {
-  const session = await auth.api.getSession({ headers: event.request.headers });
+  const session = await getAuth().api.getSession({ headers: event.request.headers });
   const user = session?.user as { id: string; isAdmin?: boolean } | undefined;
   if (!user || user.isAdmin !== true) throw new Error("FORBIDDEN");
   return user.id;
