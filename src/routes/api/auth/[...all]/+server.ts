@@ -1,10 +1,10 @@
-import { auth } from "$lib/auth";
+import { getAuth } from "$lib/auth";
 
 // Better Auth endpoint (all /api/auth/* routes) — server-only (ADR-1).
 export async function GET({ request }: { request: Request }) {
-  return auth.handler(request);
+  return getAuth().handler(request);
 }
 
 export async function POST({ request }: { request: Request }) {
-  return auth.handler(request);
+  return getAuth().handler(request);
 }

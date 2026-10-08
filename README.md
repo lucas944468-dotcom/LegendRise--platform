@@ -16,8 +16,23 @@ LegendRise™ is a capability development and venture progression platform that 
 
 ## Deploy (Netlify)
 - `netlify.toml` pins build `npm run build`, publish `build`, Node 22
-- Dashboard must set (Site settings → Environment): `BETTER_AUTH_SECRET`,
-  `BETTER_AUTH_URL` (both REQUIRED at build time), `DATABASE_URL`, `DIRECT_URL`
+- Set environment variables in the Netlify dashboard under Site configuration →
+  Environment variables. The comments in `netlify.toml` do not assign values, and
+  variable names in a deploy log do not confirm usable values.
+- Set `BETTER_AUTH_SECRET` to a strong, randomly generated secret of at least 32
+  characters. Generate it locally with `openssl rand -base64 32` and enter it
+  directly into Netlify; never commit it or share it in logs or support messages.
+  Keep it stable across deploys rather than generating a new secret during builds.
+- Set `BETTER_AUTH_URL` to the site's public HTTPS origin. Both auth variables
+  must be available to the Functions scope in the deployed context. Authentication
+  initializes on the first runtime request using `$env/dynamic/private`, not
+  during build-time module analysis. Missing values still fail closed at runtime.
+- Set `DATABASE_URL` for the existing Prisma database connection, including the
+  Functions scope for server-side queries. `DIRECT_URL` is not referenced by the
+  current Prisma schema and does not resolve the authentication-secret error.
+- After saving the variables, trigger a new deploy. If authentication reports a
+  configuration error, check for empty or default values and deploy-context
+  overrides on `BETTER_AUTH_SECRET`, and confirm that its Functions scope is enabled.
 - Optional until used: `RESEND_API_KEY`, `EMAIL_FROM`, `R2_*`, `OPENAI_API_KEY`
 
 ## Rules (PRD non-negotiables)
