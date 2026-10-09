@@ -1,5 +1,6 @@
 <script lang="ts">
   import "../app.css";
+  import { onMount } from "svelte";
   let { children } = $props();
   const links = [
     ["Onboarding", "/onboarding"],
@@ -14,6 +15,16 @@
     ["Coach", "/coach"],
     ["Login", "/login"],
   ] as const;
+
+  // Register the PWA service worker (no-op where unsupported). Registration
+  // is scoped to the site root; updates activate on next navigation.
+  onMount(() => {
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch(() => undefined);
+      });
+    }
+  });
 </script>
 
 <a class="lr-skip" href="#main">Skip to content</a>

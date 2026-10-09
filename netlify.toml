@@ -20,3 +20,15 @@
 # NOTE: if legendrise.netlify.app shows "Site not found", the Netlify site
 # itself is missing/renamed — reconnect this repo in the Netlify dashboard
 # (Add new site → Import from GitHub) and set the env vars above.
+
+# PWA: the service worker must never be served stale, or updates get stuck.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+    Cache-Control = "public, max-age=3600"
