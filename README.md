@@ -2,7 +2,7 @@
 LegendRise™ is a capability development and venture progression platform that connects assessment, learning, practice, simulation, evidence and progression.
 
 ## Stack (founder-decided; see IMPLEMENTATION_PLAN.md Phase 2)
-- **Web:** SvelteKit (Svelte 5, TypeScript) + adapter-node, self-hosted locally (`vite dev` / `node build`) — no React, no Vercel
+- **Web:** SvelteKit (Svelte 5, TypeScript) + adapter-netlify (`vite dev` / `npm run build` → `build/` + Netlify Functions) — no React
 - **Database:** local PostgreSQL + Prisma ORM/migrations — no Supabase
 - **Auth:** Better Auth (Prisma adapter), email/password + verification
 - **Storage:** Cloudflare R2 (S3-compatible) — public `lessons/` + `resources/`, private `evidence/{userId}/` via presigned URLs

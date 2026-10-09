@@ -14,7 +14,13 @@ import { PROMPT_VERSION as venture } from "$lib/ai/venture";
 export const load: PageServerLoad = async (event) => {
   await requireAdminId(event).catch(() => redirect(302, "/login"));
   const conversations = await prisma.aiConversation.count();
+  const groq = !!process.env.GROQ_API_KEY;
   const openai = !!process.env.OPENAI_API_KEY;
+  const status = groq
+    ? "configured (Groq)"
+    : openai
+      ? "configured (OpenAI)"
+      : "NOT configured — deterministic v0 fallbacks active";
   return {
     services: [
       { name: "assessor", version: assessor },
@@ -26,6 +32,6 @@ export const load: PageServerLoad = async (event) => {
       { name: "venture", version: venture },
     ],
     conversations,
-    openai: openai ? "configured" : "NOT configured — deterministic v0 fallbacks active",
+    openai: status,
   };
 };

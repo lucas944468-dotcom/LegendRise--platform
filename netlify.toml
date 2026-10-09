@@ -15,4 +15,8 @@
 #   DIRECT_URL          (direct string; for `prisma migrate deploy`)
 # Optional until their features are used:
 #   RESEND_API_KEY, EMAIL_FROM, R2_ACCOUNT_ID, R2_ACCESS_KEY_ID,
-#   R2_SECRET_ACCESS_KEY, R2_BUCKET, R2_PUBLIC_URL, OPENAI_API_KEY
+#   R2_SECRET_ACCESS_KEY, R2_BUCKET, R2_PUBLIC_URL,
+#   GROQ_API_KEY (+ optional GROQ_MODEL), OPENAI_API_KEY (+ optional OPENAI_MODEL)
+# NOTE: if legendrise.netlify.app shows "Site not found", the Netlify site
+# itself is missing/renamed — reconnect this repo in the Netlify dashboard
+# (Add new site → Import from GitHub) and set the env vars above.
